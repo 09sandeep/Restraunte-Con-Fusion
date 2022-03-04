@@ -2,12 +2,7 @@ import React, { Component } from "react";
 import {Card, CardImg, CardBody,  CardText, CardTitle} from 'reactstrap';
 
 class Dishdetail extends Component{
-    constructor(props){
-        super(props);
-        this.state = {
-            selectedDishDetail: this.props.detailDish
-        };
-    }
+    
 
     renderDish(dish){
         if (dish!=null){
@@ -35,14 +30,16 @@ class Dishdetail extends Component{
         if(comments != null){
             const cmnt = comments.map(comment => {
                 return(
+                    <div className="container">
                     <li key={comment.id}>
-                        <p>comment.comment</p>
+                        <p>{comment.comment}</p>
                         <p>-- {comment.author}, {new Intl.DateTimeFormat('en-US', {
                         year: 'numeric',
-                        month: 'long',
+                        month: 'short',
                         day: '2-digit'
-                    }).format(new Date(comment.date))}</p>
+                    }).format(new Date(Date.parse(comment.date)))}</p>
                     </li>
+                    </div>
                 );
             });
             return(
@@ -72,10 +69,12 @@ class Dishdetail extends Component{
             const dishComment = this.renderComments(dish.comments);
             
             return(
+                <div className="container">
                 <div className="row">
                     {distItem}
                     {dishComment}
 
+                </div>
                 </div>
             )
         }
